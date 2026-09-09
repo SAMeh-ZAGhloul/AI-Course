@@ -199,6 +199,36 @@ def v07_triad(prs):
          "Measured with RAGAS — faithfulness prevents hallucination; relevancy keeps answers useful.")
 
 
+def v13_grounded_answer(prs):
+    """Show the learner why evidence and citations make a RAG answer trustworthy."""
+    s = slide_new(prs, "نمط الإجابة المؤرَّضة / Grounded Answer Pattern")
+    card(s, Inches(0.7), Inches(1.55), Inches(3.0), Inches(1.2),
+         "سؤال المتعلِّم", "Learner question", FILL_A, size=18, sub=13)
+    card(s, Inches(0.7), Inches(2.95), Inches(3.0), Inches(1.25),
+         "ما الاستراتيجية الافتراضية للتقسيم؟",
+         "Which chunking default should I use?", FILL_D, size=14, sub=11)
+    arrow(s, Inches(3.85), Inches(3.35), Inches(0.65), Inches(0.3), left=False)
+
+    card(s, Inches(4.65), Inches(1.4), Inches(3.35), Inches(1.1),
+         "أدلة مسترجعة", "Retrieved evidence", FILL_B, size=18, sub=13)
+    card(s, Inches(4.65), Inches(2.75), Inches(3.35), Inches(0.72),
+         "[1] الفقرات ← الجمل ← التقسيم", "[1] paragraphs → sentences → split", FILL_D, size=12, sub=10)
+    card(s, Inches(4.65), Inches(3.62), Inches(3.35), Inches(0.72),
+         "[2] التكراري هو الخيار الموصى به", "[2] recursive is the recommended default", FILL_D, size=12, sub=10)
+    arrow(s, Inches(8.15), Inches(3.35), Inches(0.65), Inches(0.3), left=False)
+
+    card(s, Inches(8.95), Inches(1.55), Inches(3.65), Inches(1.2),
+         "إجابة موثقة", "Grounded answer", FILL_C, size=18, sub=13)
+    card(s, Inches(8.95), Inches(2.95), Inches(3.65), Inches(1.25),
+         "ابدأ بالتقسيم التكراري [1][2]",
+         "Start with recursive chunking [1][2]", FILL_D, size=14, sub=11)
+    card(s, Inches(2.4), Inches(5.35), Inches(8.55), Inches(0.75),
+         "لا دليل مسترجع؟ قل: لا أعرف / No retrieved evidence? Say: I don't know.",
+         None, FILL_C, size=14)
+    note(s, "القاعدة: لا تتجاوز الأدلة، واربط كل ادعاء بمصدر.",
+         "Rule: do not go beyond the evidence; connect every claim to a source.")
+
+
 def v08_genai_arch(prs):
     s = slide_new(prs, "المعمارية المرجعية للذكاء التوليدي / GenAI Reference Architecture")
     layers = [("أ. بوابة منصة GenAI", "A. Platform Portal — POC → MVP → PROD", FILL_A),

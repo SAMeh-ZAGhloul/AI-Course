@@ -5,6 +5,7 @@ from pptx import Presentation
 from pptx.util import Inches, Pt
 from pptx.dml.color import RGBColor
 from pptx.enum.text import PP_ALIGN
+import re
 
 from deck_data import DECKS
 
@@ -23,6 +24,7 @@ FONT_EN = "Calibri"
 SZ_TITLE, SZ_BODY, SZ_QUIZ, SZ_READ = 32, 19, 20, 20
 SZ_CODE, SZ_AR, SZ_EN, SZ_SUB = 28, 44, 30, 18
 FOOTER_TXT = "Module 02 — Data & AI Engineering Track  |  الوحدة الثانية"
+FOOTER_PAGE = re.compile(r"^V\d{2}\s+•\s+\d+/\d+$")
 
 
 def set_rtl(paragraph, rtl=True):
@@ -64,11 +66,22 @@ def add_text(slide, text, left, top, width, height, size, color, bold=False,
 
 
 def footer(slide, code, idx, total):
+    clear_footer(slide)
     add_text(slide, FOOTER_TXT, Inches(0.7), Inches(7.0), Inches(9.5),
              Inches(0.35), 10, MUTED, rtl=True, font=FONT_AR)
     add_text(slide, f"{code}  •  {idx}/{total}", Inches(10.5), Inches(7.0),
              Inches(2.1), Inches(0.35), 10, MUTED, align=PP_ALIGN.LEFT,
              rtl=False, font=FONT_EN)
+
+
+def clear_footer(slide):
+    """Remove generated footer shapes before adding the current page number."""
+    for shape in list(slide.shapes):
+        if not shape.has_text_frame:
+            continue
+        text = shape.text_frame.text.strip()
+        if text == FOOTER_TXT or FOOTER_PAGE.fullmatch(text):
+            shape._element.getparent().remove(shape._element)
 
 
 def bullets(slide, pairs, top, size=SZ_BODY):

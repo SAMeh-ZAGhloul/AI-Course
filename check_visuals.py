@@ -13,6 +13,7 @@ visuals = {
     'v10_concepts': 'From LLM to Agentic AI',
     'v11_feature_store': 'Feature Store Architecture',
     'v12_labeling_flow': 'LLM-assisted Labeling Workflow',
+    'v13_grounded_answer': 'Grounded Answer Pattern',
 }
 found = {k: [] for k in visuals}
 for v in ['V06', 'V07', 'V08', 'V09', 'V10', 'V11', 'V12']:

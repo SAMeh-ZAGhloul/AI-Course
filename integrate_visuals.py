@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Insert visualization diagram slides into the updated module decks."""
 from pptx import Presentation
+from pathlib import Path
 import generate_visuals as gv
 import generate_decks as gd
 from deck_data import DECKS
@@ -27,6 +28,7 @@ VISUAL_TITLES = {
     "v10_concepts": "من LLM إلى الأنظمة الوكيلة / From LLM to Agentic AI",
     "v11_feature_store": "معمارية مخزن الخصائص / Feature Store Architecture",
     "v12_labeling_flow": "سير عمل التصنيف بمساعدة LLM / LLM-assisted Labeling Workflow",
+    "v13_grounded_answer": "نمط الإجابة المؤرَّضة / Grounded Answer Pattern",
     "modules_overview": "وحدات المقرر / Course Modules",
 }
 
@@ -81,6 +83,7 @@ jobs = {
     "output/Module02_V09_Updated.pptx": [
         (gv.v05_rag_pipeline, "قواعد البيانات المتجهية"),
         (gv.v06_chunking, "استراتيجيات التقسيم"),
+        (gv.v13_grounded_answer, "3) التوليد"),
         (gv.v07_triad, "التقييم + 5) التحسين"),
     ],
     "output/Module02_V10_Updated.pptx": [
@@ -100,7 +103,7 @@ for path, inserts in jobs.items():
     for fn, anchor in inserts:
         insert(prs, fn, anchor)
     # renumber footers sequentially after inserts
-    code = path.split("_V")[1][:3]
+    code = Path(path).stem.split("_")[1]
     total = len(prs.slides._sldIdLst)
     for i, s in enumerate(prs.slides, 1):
         gd.footer(s, code, i, total)
