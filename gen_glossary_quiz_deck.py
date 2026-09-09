@@ -82,7 +82,7 @@ def glossary_slides(prs, pairs, per_slide=7):
     slides = []
     for i in range(0, len(pairs), per_slide):
         chunk = pairs[i:i + per_slide]
-        s = gv.slide_new(prs, f"المسرد ({i // per_slide + 1}) / Glossary")
+        s = gv.slide_new(prs, f"المصطلحات ({i // per_slide + 1}) / Glossary")
         y = Inches(1.1)
         for ar, en in chunk:
             tf = text_box(s, Inches(6.7), y, Inches(6.0), Inches(0.72))
@@ -195,7 +195,7 @@ def l03_architecture_slides(prs):
 
 if __name__ == "__main__":
     prs = gv.prs_new()
-    title_slide(prs, "المسرد والاختبارات القصيرة", "Glossary & Short Quizzes")
+    title_slide(prs, "المصطلحات والاختبارات القصيرة", "Glossary & Short Quizzes")
     glossary_slides(prs, parse_glossary("Glossary_AR_EN.md"))
     l03_architecture_slides(prs)  # detailed L03 architecture + setup (was: thin quiz)
     quiz_slides(prs, parse_quizzes("Module02_Quizzes_AR_EN.md"))

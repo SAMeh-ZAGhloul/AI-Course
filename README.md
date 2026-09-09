@@ -4,7 +4,7 @@
 
 Bilingual (AR/EN) teaching kit: updated slide decks, quizzes, glossary, mini-labs, environment guide, and a hands-on Mini-ETL → RAG lab (SQLite + ChromaDB + FastAPI + Streamlit, no Docker).
 
-حقيبة تدريسية ثنائية اللغة (عربي/إنجليزي): عروض محدثة، اختبارات، مسرد، تمارين مصغرة، دليل تجهيز البيئة، ومختبر عملي ETL مصغر ينتهي بنقطة RAG (بدون Docker).
+حقيبة تدريسية ثنائية اللغة (عربي/إنجليزي): عروض محدثة، اختبارات، المصطلحات، تمارين مصغرة، دليل تجهيز البيئة، ومختبر عملي ETL مصغر ينتهي بنقطة RAG (بدون Docker).
 
 ---
 
@@ -50,7 +50,7 @@ Bilingual (AR/EN) teaching kit: updated slide decks, quizzes, glossary, mini-lab
 
 Key updates (details in `Module02_Updated_Content_Proposal.md`): Medallion vs Warehouse vs Data Mesh comparison, Data Product/Contract, 5 chunking strategies (Recursive = default), hybrid retrieval + reranking, grounded prompting, RAG evaluation triad (faithfulness / answer relevancy / context precision), semantic caching & model routing, LLM-assisted labeling + human-in-the-loop, AI Gateway/guardrails, MLflow/DVC.
 
-## 🧪 Quizzes, glossary, mini-labs / الاختبارات والمسرد والتمارين
+## 🧪 Quizzes, glossary, mini-labs / الاختبارات والمصطلحات والتمارين
 
 - **Quizzes:** `Module02_Quizzes_AR_EN.md` + deck `output/Module02_Glossary_Quizzes.pptx` — Q&A per module (V06–V12) with answers.
 - **Glossary:** `Glossary_AR_EN.md` — 44 terms AR↔EN (ETL/ELT, Medallion, HNSW, chunking, RAG triad, guardrails, …).

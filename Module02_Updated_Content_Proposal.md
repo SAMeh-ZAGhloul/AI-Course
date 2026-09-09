@@ -182,7 +182,7 @@
    **Quiz per deck — ✅ approved:** 3–5 quick comprehension-check questions after each module (a closing slide or companion document) for decks V06–V12.
 8. **قائمة مصادر للاستزادة لكل وحدة:** روابط التوثيق الرسمي (Feast، MLflow، RAGAS…) للتعمق الذاتي.
    **Further-reading list per module:** official documentation links (Feast, MLflow, RAGAS…) for self-study.
-9. **مسرد مصطلحات ثنائي اللغة (عربي–إنجليزي):** جميع مصطلحات المسار في جدول مرجعي واحد.
+9. **المصطلحات ثنائية اللغة (عربي–إنجليزي):** جميع مصطلحات المسار في جدول مرجعي واحد.
    **Bilingual (Arabic–English) glossary:** all track terminology in a single reference table.
 
 > **توصية التنفيذ:** البدء بالبنود 1–3 لكونها الأعلى قيمة مقابل الجهد؛ تُدرَج البنود 4–6 مع الشرائح المحدَّثة؛ والبنود 7–9 اختيارية حسب الوقت المتاح.
@@ -222,7 +222,7 @@
 | مقارنة تكلفة/أداء / Cost-performance comparison | V11 أو V12 / V11 or V12 | ✅ منفَّذ / Implemented — شريحة في V12 |
 | شريحة «خريطة المسار» / "Roadmap" slide | V06 | ✅ منفَّذ / Implemented — شريحة في V06 |
 | قائمة مصادر للاستزادة / Further-reading list | V06–V12 | ✅ منفَّذ / Implemented — شريحة «للاستزادة» في كل عرض |
-| مسرد مصطلحات ثنائي اللغة / Bilingual glossary | المسار كاملًا / Whole track | ✅ منفَّذ / Implemented — `Glossary_AR_EN.md` |
+| المصطلحات ثنائية اللغة / Bilingual glossary | المسار كاملًا / Whole track | ✅ منفَّذ / Implemented — `Glossary_AR_EN.md` |
 
 ---
 
@@ -237,4 +237,4 @@
 | `l03_lab/etl_pipeline.py` | Bronze → Silver (تقسيم تكراري) → Gold (ChromaDB HNSW) / recursive chunking + local HNSW index |
 | `l03_lab/rag_api.py` | FastAPI `/query` (بحث + توليد مقيَّد + تخزين مؤقت) + أمر `evaluate` / retrieval + grounded generation + cache + evaluation |
 | `l03_lab/golden_dataset.json` | 12 سؤالًا وإجابة مرجعية مع المصادر المتوقعة / 12 reference Q&A with expected sources |
-| `Glossary_AR_EN.md` | مسرد مصطلحات ثنائي اللغة / bilingual glossary |
+| `Glossary_AR_EN.md` | المصطلحات ثنائية اللغة / bilingual glossary |
