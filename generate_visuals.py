@@ -327,7 +327,7 @@ if __name__ == "__main__":
     v01_roadmap(prs); v02_medallion(prs); v03_patterns(prs)
     v04_contract(prs); v05_rag_pipeline(prs); v06_chunking(prs)
     v07_triad(prs); v08_genai_arch(prs); v09_cost(prs); v10_concepts(prs)
-    v11_feature_store(prs); v12_labeling_flow(prs)
+    v11_feature_store(prs); v12_labeling_flow(prs); v13_grounded_answer(prs)
     out = "output/Module02_Visualizations.pptx"
     prs.save(out)
     print(out, len(prs.slides._sldIdLst), "slides")

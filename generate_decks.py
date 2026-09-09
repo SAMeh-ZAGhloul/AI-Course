@@ -24,7 +24,7 @@ FONT_EN = "Calibri"
 SZ_TITLE, SZ_BODY, SZ_QUIZ, SZ_READ = 32, 19, 20, 20
 SZ_CODE, SZ_AR, SZ_EN, SZ_SUB = 28, 44, 30, 18
 FOOTER_TXT = "Module 02 — Data & AI Engineering Track  |  الوحدة الثانية"
-FOOTER_PAGE = re.compile(r"^V\d{2}\s+•\s+\d+/\d+$")
+FOOTER_PAGE = re.compile(r"^(?:V\d{2}|\d{2}_)\s+•\s+\d+/\d+$")
 
 
 def set_rtl(paragraph, rtl=True):
