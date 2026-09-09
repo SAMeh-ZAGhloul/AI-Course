@@ -8,6 +8,7 @@ from pptx.enum.text import PP_ALIGN
 import generate_visuals as gv
 
 INK, ACCENT, MUTED = gv.INK, gv.ACCENT, gv.MUTED
+FONT_AR, FONT_EN = gv.FONT_AR, gv.FONT_EN
 
 
 def rtl(par, on=True):
@@ -26,7 +27,8 @@ def para(tf, txt, size, color=INK, bold=False, first=False, align=PP_ALIGN.RIGHT
     p.alignment = align
     rtl(p, is_ar)
     r = p.add_run(); r.text = txt
-    r.font.size, r.font.bold, r.font.color.rgb, r.font.name = Pt(size), bold, color, "Calibri"
+    imported_font = FONT_AR if is_ar else FONT_EN
+    r.font.size, r.font.bold, r.font.color.rgb, r.font.name = Pt(size), bold, color, imported_font
     return p
 
 
@@ -78,43 +80,50 @@ def title_slide(prs, ar, en):
     return s
 
 
-def glossary_slides(prs, pairs, per_slide=7):
+def glossary_slides(prs, pairs, per_slide=6):
     slides = []
     for i in range(0, len(pairs), per_slide):
         chunk = pairs[i:i + per_slide]
         s = gv.slide_new(prs, f"المصطلحات ({i // per_slide + 1}) / Glossary")
-        y = Inches(1.1)
+        y = Inches(1.15)
         for ar, en in chunk:
-            tf = text_box(s, Inches(6.7), y, Inches(6.0), Inches(0.72))
+            tf = text_box(s, Inches(6.7), y, Inches(6.0), Inches(0.78))
             para(tf, ar, 17, INK, bold=True, first=True)
-            tf2 = text_box(s, Inches(0.7), y, Inches(5.9), Inches(0.72))
+            tf2 = text_box(s, Inches(0.7), y, Inches(5.9), Inches(0.78))
             para(tf2, en, 15, MUTED, first=True, align=PP_ALIGN.LEFT, is_ar=False)
             ln = s.shapes.add_shape(gv.MSO_SHAPE.RECTANGLE, Inches(0.7),
-                                    y + Inches(0.66), Inches(12.0), Pt(0.75))
+                                    y + Inches(0.74), Inches(12.0), Pt(0.75))
             ln.fill.solid(); ln.fill.fore_color.rgb = gv.FILL_A
             ln.line.fill.background(); ln.shadow.inherit = False
-            y += Inches(0.78)
+            y += Inches(0.88)
         slides.append(s)
     return slides
 
 
 def quiz_slides(prs, sections):
+    """Q-per-slide + A reveal: one question slide + one answer slide per section."""
     slides = []
     for sec in sections:
-        s = gv.slide_new(prs, sec["title"])
-        y = Inches(1.1)
-        h = Inches(4.9) / max(len(sec["items"]), 1) - Inches(0.12)
-        h = min(max(h, Inches(1.05)), Inches(1.5))
+        # question-only slide
+        s = gv.slide_new(prs, sec["title"] + " — أسئلة / Questions")
+        y = Inches(1.15)
         for it in sec["items"]:
-            tf = text_box(s, Inches(0.7), y, Inches(12.0), h)
-            para(tf, "س: " + it["q_ar"], 15, INK, bold=True, first=True)
+            tf = text_box(s, Inches(0.7), y, Inches(12.0), Inches(1.0))
+            para(tf, "س: " + it["q_ar"], 16, INK, bold=True, first=True)
             if it.get("q_en"):
                 para(tf, "Q: " + it["q_en"], 12, MUTED, is_ar=False)
-            para(tf, "✅ " + it["a_ar"], 13, ACCENT)
+            y += Inches(1.1)
+        slides.append(s)
+        # answer slide
+        s2 = gv.slide_new(prs, sec["title"] + " — إجابات / Answers")
+        y = Inches(1.15)
+        for it in sec["items"]:
+            tf = text_box(s2, Inches(0.7), y, Inches(12.0), Inches(1.0))
+            para(tf, "✅ " + it["a_ar"], 14, ACCENT, bold=True, first=True)
             if it.get("a_en"):
                 para(tf, "✅ " + it["a_en"], 11, MUTED, is_ar=False)
-            y += h + Inches(0.12)
-        slides.append(s)
+            y += Inches(1.1)
+        slides.append(s2)
     return slides
 
 

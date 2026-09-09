@@ -6,57 +6,106 @@ import generate_decks as gd
 from deck_data import DECKS
 
 
-def insert(prs, draw_fn, after_index):
-    """Draw a new slide at the end, then move it to position after_index+1."""
+def slide_has(prs, marker):
+    for s in prs.slides:
+        txt = " ".join(sh.text_frame.text for sh in s.shapes if sh.has_text_frame)
+        if marker in txt:
+            return True
+    return False
+
+
+VISUAL_TITLES = {
+    "v01_roadmap": "خريطة المسار / Track Roadmap",
+    "v02_medallion": "المعمارية المتدرِّجة Medallion / Medallion Layers",
+    "v03_patterns": "أنماط معالجة البيانات الثلاثة / Three Data Patterns",
+    "v04_contract": "منتج البيانات وعقد البيانات / Data Product & Contract",
+    "v05_rag_pipeline": "خط أنابيب RAG / RAG Pipeline",
+    "v06_chunking": "استراتيجيات تقسيم النصوص / Chunking Strategies",
+    "v07_triad": "مثلث تقييم RAG / RAG Evaluation Triad",
+    "v08_genai_arch": "المعمارية المرجعية للذكاء التوليدي / GenAI Reference Architecture",
+    "v09_cost": "التكلفة عمليًا: التضمين مقابل التوليد / Cost: Embedding vs Generation",
+    "v10_concepts": "من LLM إلى الأنظمة الوكيلة / From LLM to Agentic AI",
+    "v11_feature_store": "معمارية مخزن الخصائص / Feature Store Architecture",
+    "v12_labeling_flow": "سير عمل التصنيف بمساعدة LLM / LLM-assisted Labeling Workflow",
+    "modules_overview": "وحدات المقرر / Course Modules",
+}
+
+
+def insert(prs, draw_fn, after_title):
+    """Insert visual after the slide whose title contains after_title (idempotent).
+
+    Pre-checks the exact visual title — if present, skips drawing entirely
+    (no orphan slide parts, no zip duplicate warnings on re-run).
+    """
+    want = VISUAL_TITLES.get(draw_fn.__name__)
+    if want:
+        for s in prs.slides:
+            txt = " ".join(sh.text_frame.text for sh in s.shapes if sh.has_text_frame)
+            if want in txt:
+                return False
+    idx = None
+    for i, s in enumerate(prs.slides):
+        txt = " ".join(sh.text_frame.text for sh in s.shapes if sh.has_text_frame)
+        if after_title in txt:
+            idx = i
+    n_before = len(prs.slides._sldIdLst)
     draw_fn(prs)
     lst = prs.slides._sldIdLst
-    ids = list(lst)
-    el = ids[-1]
+    el = list(lst)[-1]
     lst.remove(el)
-    lst.insert(after_index + 1, el)
+    lst.insert((idx + 1) if idx is not None else n_before, el)
+    return True
 
 
 def modules_overview(prs):
-    """Course-modules description slide (V06–V12), same body style as the deck."""
-    pairs = [(f"{code} — {DECKS[code]['title_ar']}",
-              f"{code} — {DECKS[code]['title_en']}")
+    """Course-modules description slide (V06–V12), one line per module (no overflow)."""
+    pairs = [(f"{code} — {DECKS[code]['title_ar']} / {DECKS[code]['title_en']}", None)
              for code in sorted(DECKS)]
-    gd.content_slide(prs, "وحدات المقرر / Course Modules", pairs)
+    gd.content_slide(prs, "وحدات المقرر / Course Modules", pairs, size=16)
 
 
+# one visual per concept — deduped (P0 fix); anchor = title substring
 jobs = {
     "output/Module02_V06_Updated.pptx": [
-        (gv.v01_roadmap, 1),    # after "خريطة المسار" (idx 1)
-        (modules_overview, 2),  # course modules description after roadmap visual
+        (gv.v01_roadmap, "أجندة العرض"),
+        (modules_overview, "Track Roadmap"),
     ],
     "output/Module02_V07_Updated.pptx": [
-        (gv.v03_patterns, 4),   # after "متى تختار كل نموذج؟" (idx 4 → pos 5)
-        (gv.v04_contract, 3),   # after "منتجات البيانات وعقودها" (idx 3 → pos 4)
-        (gv.v02_medallion, 2),  # after "معمارية Lakehouse" (idx 2 → pos 3)
+        (gv.v02_medallion, "معمارية Lakehouse"),
+        (gv.v04_contract, "منتجات البيانات وعقودها"),
+        (gv.v03_patterns, "متى تختار كل نموذج"),
     ],
     "output/Module02_V08_Updated.pptx": [
-        (gv.v11_feature_store, 3),  # after "اتساق Offline/Online" (idx 3)
+        (gv.v11_feature_store, "اتساق Offline/Online"),
     ],
     "output/Module02_V09_Updated.pptx": [
-        (gv.v07_triad, 5),          # after "التقييم + التحسين" (idx 5)
-        (gv.v06_chunking, 2),       # after "الفهرسة: استراتيجيات التقسيم" (idx 2)
-        (gv.v05_rag_pipeline, 1),   # after "قواعد البيانات المتجهية" (idx 1)
+        (gv.v05_rag_pipeline, "قواعد البيانات المتجهية"),
+        (gv.v06_chunking, "استراتيجيات التقسيم"),
+        (gv.v07_triad, "التقييم + 5) التحسين"),
     ],
     "output/Module02_V10_Updated.pptx": [
-        (gv.v12_labeling_flow, 3),  # after "التصنيف بمساعدة LLM" (idx 3)
+        (gv.v12_labeling_flow, "التصنيف بمساعدة LLM"),
     ],
     "output/Module02_V11_Updated.pptx": [
-        (gv.v08_genai_arch, 3),     # after architecture part 2/2 (idx 3)
+        (gv.v08_genai_arch, "المعمارية المرجعية للذكاء التوليدي (2/2)"),
     ],
     "output/Module02_V12_Updated.pptx": [
-        (gv.v09_cost, 4),       # after "التكلفة والأداء عمليًا" (idx 4)
-        (gv.v10_concepts, 2),   # after "تمييز المفاهيم" (idx 2)
+        (gv.v10_concepts, "تمييز المفاهيم"),
+        (gv.v09_cost, "التكلفة والأداء عمليًا"),
     ],
 }
 
 for path, inserts in jobs.items():
     prs = Presentation(path)
-    for fn, idx in inserts:
-        insert(prs, fn, idx)
-    prs.save(path)
+    for fn, anchor in inserts:
+        insert(prs, fn, anchor)
+    # renumber footers sequentially after inserts
+    code = path.split("_V")[1][:3]
+    total = len(prs.slides._sldIdLst)
+    for i, s in enumerate(prs.slides, 1):
+        gd.footer(s, code, i, total)
+    tmp = path + ".tmp"
+    prs.save(tmp)
+    import os
+    os.replace(tmp, path)
     print(path, "->", len(prs.slides._sldIdLst), "slides")

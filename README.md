@@ -90,9 +90,11 @@ LLM generation defaults to OpenRouter free tier (`OPENROUTER_API_KEY`, model `nv
 
 ```bash
 pip install python-pptx pillow numpy
-python generate_decks.py        # V06–V12 updated decks → output/
-python gen_glossary_quiz_deck.py
-python generate_visuals.py
+python generate_decks.py        # V06–V12 updated decks → output/ (agenda, tables, Q+A, footers)
+python gen_glossary_quiz_deck.py  # glossary (6/slide) + Q/A split slides → output/
+python integrate_visuals.py     # idempotent single-visual inserts + footer renumber
+python generate_visuals.py      # standalone Module02_Visualizations.pptx (archive reference)
+python check_deck_quality.py    # QA gate: duplicate titles + overflow warnings (expect PASS)
 ```
 
 ## 🙋 Source / المصدر

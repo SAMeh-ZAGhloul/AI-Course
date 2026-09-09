@@ -7,6 +7,9 @@ from gen_glossary_quiz_deck import text_box, para
 
 PPTX = "output/Module02_Glossary_Quizzes.pptx"
 
+MARKERS = ("L03 Lab Setup", "L03 Lab Architecture", "Running the L03 Lab",
+           "Freeze Lessons", "Lab Dataset, ETL")
+
 p = Presentation(PPTX)
 # drop outdated setup slides if present, then (re)add the current ones
 removed = True
@@ -14,11 +17,11 @@ while removed:
     removed = False
     for idx, s in enumerate(list(p.slides)):
         txt = " ".join(sh.text_frame.text for sh in s.shapes if sh.has_text_frame)
-        if "L03 Lab Setup" in txt:
+        if any(m in txt for m in MARKERS):
             p.slides._sldIdLst.remove(list(p.slides._sldIdLst)[idx])
             removed = True
             break
-if any("L03 Lab Setup" in sh.text_frame.text
+if any(any(m in sh.text_frame.text for m in MARKERS)
        for s in p.slides for sh in s.shapes if sh.has_text_frame):
     print("setup slide already present — skipping")
 else:

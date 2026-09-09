@@ -11,6 +11,8 @@ INK = RGBColor(0x33, 0x33, 0x33)
 TITLE_C = RGBColor(0x1F, 0x3B, 0x5C)
 ACCENT = RGBColor(0x1F, 0x4E, 0x79)
 MUTED = RGBColor(0x66, 0x66, 0x66)
+FONT_AR = "Arial"
+FONT_EN = "Calibri"
 FILL_A = RGBColor(0xDC, 0xE6, 0xF1)   # light blue
 FILL_B = RGBColor(0xE2, 0xEF, 0xDA)   # light green
 FILL_C = RGBColor(0xFD, 0xE9, 0xD9)   # light orange
@@ -40,7 +42,7 @@ def slide_new(prs, title):
     par.alignment = PP_ALIGN.RIGHT
     set_rtl(par)
     r = par.add_run(); r.text = title
-    r.font.size, r.font.bold, r.font.name = Pt(30), True, "Calibri"
+    r.font.size, r.font.bold, r.font.name = Pt(30), True, FONT_AR
     r.font.color.rgb = TITLE_C
     return s
 
@@ -55,16 +57,16 @@ def card(slide, x, y, w, h, ar, en=None, fill=FILL_A, size=16, sub=12):
     p1 = tf.paragraphs[0]; p1.alignment = PP_ALIGN.CENTER; set_rtl(p1)
     r1 = p1.add_run(); r1.text = ar
     r1.font.size, r1.font.bold, r1.font.color.rgb = Pt(size), True, INK
-    r1.font.name = "Calibri"
+    r1.font.name = FONT_AR
     if en:
         p2 = tf.add_paragraph(); p2.alignment = PP_ALIGN.CENTER; set_rtl(p2, False)
         r2 = p2.add_run(); r2.text = en
         r2.font.size, r2.font.color.rgb = Pt(sub), MUTED
-        r2.font.name = "Calibri"
+        r2.font.name = FONT_EN
     return sh
 
 
-def arrow(slide, x, y, w=Inches(0.5), h=Inches(0.3), left=False):
+def arrow(slide, x, y, w=Inches(0.5), h=Inches(0.3), left=True):
     sh = slide.shapes.add_shape(
         MSO_SHAPE.LEFT_ARROW if left else MSO_SHAPE.RIGHT_ARROW, x, y, w, h)
     sh.fill.solid(); sh.fill.fore_color.rgb = ACCENT
@@ -77,7 +79,7 @@ def note(slide, ar, en=None, y=Inches(6.7)):
     tf = tb.text_frame; tf.word_wrap = True
     p = tf.paragraphs[0]; p.alignment = PP_ALIGN.RIGHT; set_rtl(p)
     r = p.add_run(); r.text = ar
-    r.font.size, r.font.color.rgb = Pt(14), MUTED; r.font.name = "Calibri"
+    r.font.size, r.font.color.rgb = Pt(14), MUTED; r.font.name = FONT_AR
     if en:
         p2 = tf.add_paragraph(); p2.alignment = PP_ALIGN.RIGHT; set_rtl(p2, False)
         r2 = p2.add_run(); r2.text = en
