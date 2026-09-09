@@ -7,17 +7,20 @@ Lightweight local install — **no Docker**: Python venv + built-in SQLite (Bron
 ## البناء / Structure
 ```
 l03_lab/
-├── requirements.txt        # المكوّنات الخفيفة / lightweight deps
-├── .venv/                  # بيئة التشغيل (لا تُرفع) — شغّل كل شيء من داخلها
-├── data/raw/               # ضع المستندات الخام هنا (PDF/CSV/MD/TXT) / put raw docs here
-├── etl_pipeline.py         # Bronze → Silver → Gold (دفعات 10 + سجلات Gold)
-├── rag_api.py              # نقطة النهاية /query + التقييم / endpoint + evaluation
-├── streamlit_ui.py         # الواجهة (5 تبويبات) — إعادة استخدام نفس عميل Chroma
-├── run_ui.sh               # تشغيل الواجهة من الـ venv مع متغيرات macOS — فضّله
-├── golden_dataset.json     # المجموعة المرجعية (12 سؤالًا وإجابة) / golden dataset (12 Q&A)
-├── ARCHITECTURE.md         # معمارية التطبيق: ETL + backend + frontend / app architecture
-├── l03_lab.db              # SQLite (يُنشأ تلقائيًا) / auto-created
-└── chroma_db/              # فهرس ChromaDB المحلي (يُنشأ تلقائيًا) / local index (auto-created)
+├── requirements.txt                 # المكوّنات الخفيفة / lightweight deps
+├── .venv/                           # بيئة التشغيل (لا تُرفع) — شغّل كل شيء من داخلها
+├── data/raw/                        # ضع المستندات الخام هنا / put raw docs here
+├── etl_pipeline.py                  # Bronze → Silver → Gold pipeline
+├── rag_api.py                       # نقطة النهاية / endpoint + evaluation
+├── streamlit_ui.py                  # الواجهة الأصلية (5 تبويبات) / original UI
+├── streamlit_ui_enhanced.py         # 🎓 NEW: الواجهة التعليمية (6 تبويبات + رسوم بيانية)
+├── run_ui.sh                        # تشغيل الواجهة الأصلية / run original UI
+├── run_ui_enhanced.sh               # 🎓 NEW: تشغيل الواجهة التعليمية / run educational UI
+├── golden_dataset.json              # المجموعة المرجعية / golden dataset (12 Q&A)
+├── ARCHITECTURE.md                  # معمارية / app architecture
+├── ENHANCED_UI_README.md            # 🎓 NEW: دليل الواجهة المحسّنة / enhanced UI guide
+├── l03_lab.db                       # SQLite (يُنشأ تلقائيًا) / auto-created
+└── chroma_db/                       # فهرس ChromaDB / local index (auto-created)
 ```
 
 ## خطوات التشغيل / Steps
@@ -39,12 +42,28 @@ l03_lab/
    ```bash
    python rag_api.py evaluate        # دقة السياق + العثور على المصدر المتوقع / context precision + expected-source hit
    ```
-5. **واجهة المستخدم (Streamlit) — عبر `run_ui.sh` (مفضّل):**
+5. **واجهة المستخدم (Streamlit) — Choose one:**
+
+   **Option A: 🎓 Enhanced Educational UI (Recommended for Learning)**
    ```bash
-   ./run_ui.sh   # يستخدم .venv ويضبط متغيرات macOS — ثم http://localhost:8501
+   ./run_ui_enhanced.sh   # 6 tabs with visual explanations, embeddings, charts
+   # http://localhost:8501
    ```
-   خمسة تبويبات: رفع مستندات وفهرستها، قائمة المستندات المفهرسة مع معاينة المقاطع، استعلام RAG مع المصادر، تشغيل التقييم، ومعلومات المختبر — كلها ثنائية اللغة.
-   Five tabs: upload & ingest, indexed documents with chunk inspection, RAG query with sources, evaluation run, and lab info — all bilingual.
+   ✨ Features:
+   - 🎓 Educational Flow tab with visual ETL, embedding space, RAG pipeline
+   - 📊 Charts: embedding projections, similarity scores, flowcharts
+   - 📚 Learning outcomes, external resources
+   - 🔍 Enhanced debugging & metrics
+   - See: `ENHANCED_UI_README.md` for full guide
+   
+   **Option B: Original Simple UI**
+   ```bash
+   ./run_ui.sh   # 5 tabs, minimal interface
+   # http://localhost:8501
+   ```
+   5 tabs: رفع وفهرسة، مستندات، استعلام RAG، تقييم، معلومات
+   Five tabs: upload & ingest, documents, RAG query, evaluation, about
+   
    > **مهم / Important:** شغّل الواجهة من الـ venv حصرًا — التشغيل من بيئة بايثون عامة (مثل homebrew) مع مكوّنات غير متوافقة يسبب انهيارًا (segfault).
    > **Important:** run the UI strictly from the venv — a global Python env (e.g. homebrew) with mismatched packages causes a segfault.
 

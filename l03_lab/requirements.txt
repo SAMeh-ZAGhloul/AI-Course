@@ -11,6 +11,9 @@ pypdf==5.1.0
 rapidfuzz==3.10.1
 requests==2.32.3
 streamlit==1.40.1
+# Enhanced UI: visualizations & embedding projections
+plotly>=5.0              # Interactive charts and diagrams
+scikit-learn>=1.0        # PCA/t-SNE for embedding projection
 # Generator: OpenRouter free tier by default (needs OPENROUTER_API_KEY env var)
 # requests (already listed) is used for the OpenRouter API call.
 # Optional: OpenAI as the generator instead

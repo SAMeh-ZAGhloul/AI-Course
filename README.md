@@ -24,16 +24,21 @@ Bilingual (AR/EN) teaching kit: updated slide decks, quizzes, glossary, mini-lab
 │   ├── Module02_Glossary_Quizzes.pptx
 │   └── Module02_Visualizations.pptx
 ├── *.py                                   # deck-generation scripts (deck_data.py, generate_decks.py, …)
-├── l03_lab/                               # live lab: mini ETL → RAG endpoint
-│   ├── README.md                          # lab run guide (AR/EN)
-│   ├── ARCHITECTURE.md                    # ETL + backend + frontend design (AR/EN)
-│   ├── requirements.txt                   # lightweight local stack
-│   ├── etl_pipeline.py                    # Bronze → Silver → Gold
-│   ├── rag_api.py                         # FastAPI /query + evaluate
-│   ├── streamlit_ui.py                    # 5-tab bilingual UI
-│   ├── run_ui.sh                          # preferred UI launcher (venv + macOS env vars)
-│   ├── golden_dataset.json                # 12 bilingual Q&A benchmark
-│   └── data/raw/                          # sample docs (rag_basics.md, etl_notes.txt, PDFs)
+├── l03_lab/                                    # live lab: mini ETL → RAG endpoint
+│   ├── README.md                             # lab run guide (AR/EN) — updated
+│   ├── ARCHITECTURE.md                       # ETL + backend + frontend design (AR/EN)
+│   ├── ENHANCED_UI_README.md                 # 🎓 NEW: enhanced educational UI guide
+│   ├── IMPLEMENTATION_SUMMARY.md             # 🎓 NEW: detailed implementation report
+│   ├── QUICK_REFERENCE.md                    # 🎓 NEW: quick start guide
+│   ├── requirements.txt                      # lightweight local stack — updated
+│   ├── etl_pipeline.py                       # Bronze → Silver → Gold
+│   ├── rag_api.py                            # FastAPI /query + evaluate
+│   ├── streamlit_ui.py                       # original UI (5 tabs, minimal)
+│   ├── streamlit_ui_enhanced.py              # 🎓 NEW: enhanced educational UI (6 tabs + visualizations)
+│   ├── run_ui.sh                             # launcher for original UI
+│   ├── run_ui_enhanced.sh                    # 🎓 NEW: launcher for enhanced UI
+│   ├── golden_dataset.json                   # 12 bilingual Q&A benchmark
+│   └── data/raw/                             # sample docs (rag_basics.md, etl_notes.txt, PDFs)
 ```
 
 ## 🗂️ Module 02 decks / عروض الوحدة الثانية
@@ -78,11 +83,22 @@ curl -X POST localhost:8000/query -H "Content-Type: application/json" \
 # Benchmark (12 bilingual Q&A)
 python rag_api.py evaluate
 
-# UI (preferred — sets macOS env vars, uses .venv)
-./run_ui.sh                         # http://localhost:8501
+# UI — Choose one:
+
+# 🎓 Enhanced Educational UI (recommended for teaching/learning)
+# Includes: visual ETL flow, embedding space visualization, RAG pipeline flowchart, learning resources
+./run_ui_enhanced.sh                # http://localhost:8501 — 6 tabs with visualizations
+
+# OR: Original Simple UI (lightweight)
+./run_ui.sh                         # http://localhost:8501 — 5 tabs, minimal
 ```
 
-> Run everything **inside `.venv`** — a global Python (e.g. homebrew) segfaults at browser connect. Full guide: `L03_Environment_Setup_Guide.md`; design: `l03_lab/ARCHITECTURE.md`; lab manual: `l03_lab/README.md`.
+**📚 UI Options:**
+- **Enhanced** (`run_ui_enhanced.sh`): 🎓 Educational with 4 visualizations, learning outcomes, metrics
+  - See: `l03_lab/ENHANCED_UI_README.md`, `l03_lab/QUICK_REFERENCE.md`
+- **Original** (`run_ui.sh`): 💻 Simple interface, lightweight, same functionality
+
+> Run everything **inside `.venv`** — a global Python (e.g. homebrew) segfaults at browser connect. Full guides: `L03_Environment_Setup_Guide.md`; design: `l03_lab/ARCHITECTURE.md`; lab manual: `l03_lab/README.md`; enhanced UI: `l03_lab/ENHANCED_UI_README.md`.
 
 LLM generation defaults to OpenRouter free tier (`OPENROUTER_API_KEY`, model `nvidia/nemotron-3-super-120b-a12b:free`); `GENERATOR=openai` is supported. Key lives in `l03_lab/.env` (never committed — see `.gitignore`).
 
