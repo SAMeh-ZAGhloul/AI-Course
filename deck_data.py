@@ -330,7 +330,7 @@ DECKS.update({
 DECKS.update({
     "V12": {
         "title_ar": "أساسيات MLOps + تمهيد للمختبر",
-        "title_en": "MLOps Fundamentals + Lab Prelude",
+        "title_en": "MLOps Fundamentals + Lab Introduction",
         "slides": [
             ("MLOps والأدوات / MLOps & Tools", [
                 ("MLflow لتتبع التجارب والنماذج، Kubeflow لأتمتة الخطوط، DVC لإصدارات البيانات.",
@@ -354,7 +354,7 @@ DECKS.update({
                 ("قاعدة FinOps: قِس التكلفة لكل طلب (per-request) قبل التوسع.",
                  "FinOps rule: measure per-request cost before scaling."),
             ]),
-            ("تمهيد للمختبر L03 / Lab Prelude", [
+            ("تمهيد للمختبر L03 / Lab Introduction", [
                 ("المختبر: خط محلي خفيف — Python venv + SQLite مدمجة (Bronze/Silver) + ChromaDB (Gold) — دون Docker، بنقطة نهاية FastAPI على المسار /query.",
                  "The lab: lightweight local pipeline — Python venv + built-in SQLite (Bronze/Silver) + ChromaDB (Gold) — no Docker, ending in a FastAPI /query endpoint."),
             ]),

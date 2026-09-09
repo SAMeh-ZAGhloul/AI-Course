@@ -112,7 +112,7 @@
 - ✅ **الإجابة:** بوابات تحكم وموافقات مرحلية آلية قبل الإنتاج.
 - ✅ **Answer:** Automated control gates and approvals before production.
 
-## V12 — أساسيات MLOps + تمهيد للمختبر / MLOps Fundamentals + Lab Prelude
+## V12 — أساسيات MLOps + تمهيد للمختبر / MLOps Fundamentals + Lab Introduction
 
 **س1:** فرّق بين AI Agent وAgentic AI.
 **Q1:** Differentiate an AI agent from agentic AI.
