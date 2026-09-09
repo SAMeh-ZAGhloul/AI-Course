@@ -14,6 +14,12 @@ visuals = {
     'v11_feature_store': 'Feature Store Architecture',
     'v12_labeling_flow': 'LLM-assisted Labeling Workflow',
     'v13_grounded_answer': 'Grounded Answer Pattern',
+    'v14_data_spectrum': 'Data Spectrum & Formats',
+    'v15_warehouse_lake': 'Warehouse vs Lake Decision Map',
+    'v16_raw_features': 'Raw Data to Features',
+    'v17_label_quality': 'Label Quality Loop',
+    'v18_lineage_map': 'Data Lineage Map',
+    'v19_mlops_lifecycle': 'MLOps Lifecycle',
 }
 found = {k: [] for k in visuals}
 for v in ['V06', 'V07', 'V08', 'V09', 'V10', 'V11', 'V12']:

@@ -205,6 +205,7 @@ def l03_architecture_slides(prs):
 if __name__ == "__main__":
     prs = gv.prs_new()
     title_slide(prs, "المصطلحات والاختبارات القصيرة", "Glossary & Short Quizzes")
+    gv.v20_glossary_map(prs)
     glossary_slides(prs, parse_glossary("Glossary_AR_EN.md"))
     l03_architecture_slides(prs)  # detailed L03 architecture + setup (was: thin quiz)
     quiz_slides(prs, parse_quizzes("Module02_Quizzes_AR_EN.md"))

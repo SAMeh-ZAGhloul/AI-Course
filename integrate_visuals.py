@@ -29,6 +29,12 @@ VISUAL_TITLES = {
     "v11_feature_store": "معمارية مخزن الخصائص / Feature Store Architecture",
     "v12_labeling_flow": "سير عمل التصنيف بمساعدة LLM / LLM-assisted Labeling Workflow",
     "v13_grounded_answer": "نمط الإجابة المؤرَّضة / Grounded Answer Pattern",
+    "v14_data_spectrum": "طيف البيانات والتنسيقات / Data Spectrum & Formats",
+    "v15_warehouse_lake": "خريطة قرار: المستودع مقابل البحيرة / Warehouse vs Lake Decision Map",
+    "v16_raw_features": "من البيانات الخام إلى الخصائص / Raw Data to Features",
+    "v17_label_quality": "حلقة جودة التصنيف / Label Quality Loop",
+    "v18_lineage_map": "خريطة سلسلة العهدة / Data Lineage Map",
+    "v19_mlops_lifecycle": "دورة حياة MLOps / MLOps Lifecycle",
     "modules_overview": "وحدات المقرر / Course Modules",
 }
 
@@ -71,13 +77,16 @@ jobs = {
     "output/Module02_V06_Updated.pptx": [
         (gv.v01_roadmap, "أجندة العرض"),
         (modules_overview, "Track Roadmap"),
+        (gv.v14_data_spectrum, "التنسيقات"),
     ],
     "output/Module02_V07_Updated.pptx": [
+        (gv.v15_warehouse_lake, "المستودع مقابل البحيرة"),
         (gv.v02_medallion, "معمارية Lakehouse"),
         (gv.v04_contract, "منتجات البيانات وعقودها"),
         (gv.v03_patterns, "متى تختار كل نموذج"),
     ],
     "output/Module02_V08_Updated.pptx": [
+        (gv.v16_raw_features, "هندسة الخصائص"),
         (gv.v11_feature_store, "اتساق Offline/Online"),
     ],
     "output/Module02_V09_Updated.pptx": [
@@ -87,12 +96,15 @@ jobs = {
         (gv.v07_triad, "التقييم + 5) التحسين"),
     ],
     "output/Module02_V10_Updated.pptx": [
+        (gv.v17_label_quality, "لماذا التصنيف"),
         (gv.v12_labeling_flow, "التصنيف بمساعدة LLM"),
     ],
     "output/Module02_V11_Updated.pptx": [
+        (gv.v18_lineage_map, "الحوكمة والفهرسة"),
         (gv.v08_genai_arch, "المعمارية المرجعية للذكاء التوليدي (2/2)"),
     ],
     "output/Module02_V12_Updated.pptx": [
+        (gv.v19_mlops_lifecycle, "MLOps والأدوات"),
         (gv.v10_concepts, "تمييز المفاهيم"),
         (gv.v09_cost, "التكلفة والأداء عمليًا"),
     ],

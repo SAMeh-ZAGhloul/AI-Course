@@ -38,15 +38,15 @@ Bilingual (AR/EN) teaching kit: updated slide decks, quizzes, glossary, mini-lab
 
 ## 🗂️ Module 02 decks / عروض الوحدة الثانية
 
-| Deck | Topic / الموضوع | Updated file / الملف المحدث |
-|---|---|---|
-| V06 | Data Fundamentals / أساسيات البيانات | `output/Module02_V06_Updated.pptx` |
-| V07 | Warehouses, Lakes & Lakehouse / المستودعات والبحيرات | `output/Module02_V07_Updated.pptx` |
-| V08 | Feature Engineering & Stores / هندسة الخصائص | `output/Module02_V08_Updated.pptx` |
-| V09 | Vector DBs + Applied RAG / القواعد المتجهية + RAG | `output/Module02_V09_Updated.pptx` |
-| V10 | Labeling at Scale / التصنيف على نطاق واسع | `output/Module02_V10_Updated.pptx` |
-| V11 | Governance, Lineage & Catalog / الحوكمة | `output/Module02_V11_Updated.pptx` |
-| V12 | MLOps + Lab Introduction / أساسيات MLOps | `output/Module02_V12_Updated.pptx` |
+| Deck | Topic / الموضوع                                                  | Updated file / الملف المحدث |
+| ---- | ----------------------------------------------------------------------- | -------------------------------------- |
+| V06  | Data Fundamentals / أساسيات البيانات                     | `output/Module02_V06_Updated.pptx`   |
+| V07  | Warehouses, Lakes & Lakehouse / المستودعات والبحيرات | `output/Module02_V07_Updated.pptx`   |
+| V08  | Feature Engineering & Stores / هندسة الخصائص                | `output/Module02_V08_Updated.pptx`   |
+| V09  | Vector DBs + Applied RAG / القواعد المتجهية + RAG        | `output/Module02_V09_Updated.pptx`   |
+| V10  | Labeling at Scale / التصنيف على نطاق واسع             | `output/Module02_V10_Updated.pptx`   |
+| V11  | Governance, Lineage & Catalog / الحوكمة                          | `output/Module02_V11_Updated.pptx`   |
+| V12  | MLOps + Lab Introduction / أساسيات MLOps                         | `output/Module02_V12_Updated.pptx`   |
 
 Key updates (details in `Module02_Updated_Content_Proposal.md`): Medallion vs Warehouse vs Data Mesh comparison, Data Product/Contract, 5 chunking strategies (Recursive = default), hybrid retrieval + reranking, grounded prompting, RAG evaluation triad (faithfulness / answer relevancy / context precision), semantic caching & model routing, LLM-assisted labeling + human-in-the-loop, AI Gateway/guardrails, MLflow/DVC.
 

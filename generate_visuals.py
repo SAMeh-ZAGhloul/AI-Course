@@ -229,6 +229,153 @@ def v13_grounded_answer(prs):
          "Rule: do not go beyond the evidence; connect every claim to a source.")
 
 
+def v14_data_spectrum(prs):
+    s = slide_new(prs, "طيف البيانات والتنسيقات / Data Spectrum & Formats")
+    items = [
+        ("مهيكلة", "Structured", "جداول / Tables", "CSV • Parquet", FILL_A),
+        ("شبه مهيكلة", "Semi-structured", "سجلات مرنة / Flexible records", "JSON • Avro", FILL_B),
+        ("غير مهيكلة", "Unstructured", "نصوص وصور وصوت / Text, images, audio", "PDF • JPG • MP3", FILL_C),
+    ]
+    x = Inches(0.7)
+    for ar, en, use, formats, fill in items:
+        card(s, x, Inches(1.45), Inches(3.85), Inches(1.05), ar, en, fill, size=18, sub=13)
+        card(s, x, Inches(2.7), Inches(3.85), Inches(1.0), use, formats, FILL_D, size=14, sub=12)
+        x += Inches(4.05)
+    card(s, Inches(1.6), Inches(4.55), Inches(10.1), Inches(0.85),
+         "اختر التنسيق حسب الاستخدام: تبادل بسيط ← تحليلات سريعة ← محتوى غني",
+         "Choose the format for the job: simple exchange ← fast analytics ← rich content",
+         FILL_A, size=15, sub=12)
+    note(s, "Parquet عمودي للتحليلات؛ JSON مرن للواجهات؛ الملفات الغنية تحتاج استخراج محتوى.",
+         "Parquet is columnar for analytics; JSON is flexible for APIs; rich files need content extraction.")
+
+
+def v15_warehouse_lake(prs):
+    s = slide_new(prs, "خريطة قرار: المستودع مقابل البحيرة / Warehouse vs Lake Decision Map")
+    card(s, Inches(0.8), Inches(1.35), Inches(5.5), Inches(0.9),
+         "مستودع البيانات", "Data Warehouse", FILL_B, size=20, sub=14)
+    card(s, Inches(7.0), Inches(1.35), Inches(5.5), Inches(0.9),
+         "بحيرة البيانات", "Data Lake", FILL_A, size=20, sub=14)
+    rows = [
+        ("مخطط عند الكتابة", "Schema on write", "مخطط عند القراءة", "Schema on read"),
+        ("بيانات منظمة + SQL", "Curated data + SQL", "كل التنسيقات", "Any format"),
+        ("تقارير وذكاء أعمال", "Reporting and BI", "استكشاف وAI/ML", "Exploration and AI/ML"),
+    ]
+    y = Inches(2.55)
+    for left_ar, left_en, right_ar, right_en in rows:
+        card(s, Inches(0.8), y, Inches(5.5), Inches(0.8), left_ar, left_en, FILL_D, size=14, sub=11)
+        card(s, Inches(7.0), y, Inches(5.5), Inches(0.8), right_ar, right_en, FILL_D, size=14, sub=11)
+        y += Inches(0.95)
+    card(s, Inches(4.25), Inches(5.7), Inches(4.85), Inches(0.7),
+         "Lakehouse = مرونة البحيرة + موثوقية المستودع",
+         "Lakehouse = lake flexibility + warehouse reliability", FILL_C, size=14, sub=11)
+    note(s, "لا يوجد فائز دائم: ابدأ من نوع السؤال، والفريق، ومتطلبات الحوكمة.",
+         "There is no universal winner: start with the question, team, and governance needs.")
+
+
+def v16_raw_features(prs):
+    s = slide_new(prs, "من البيانات الخام إلى الخصائص / Raw Data to Features")
+    steps = [
+        ("أحداث خام", "Raw events", FILL_D),
+        ("تنظيف وتحويل", "Clean & transform", FILL_A),
+        ("تعريف الخصائص", "Feature definitions", FILL_B),
+        ("تدريب + خدمة", "Training + serving", FILL_C),
+    ]
+    x = Inches(0.7)
+    for i, (ar, en, fill) in enumerate(steps):
+        card(s, x, Inches(2.2), Inches(2.7), Inches(1.4), ar, en, fill, size=16, sub=12)
+        if i < len(steps) - 1:
+            arrow(s, x + Inches(2.78), Inches(2.75), Inches(0.45), Inches(0.3), left=False)
+        x += Inches(3.2)
+    card(s, Inches(3.35), Inches(4.35), Inches(6.65), Inches(0.9),
+         "مخزن الخصائص: تعريف واحد متسق للتدريب والخدمة",
+         "Feature store: one consistent definition for training and serving", FILL_B, size=15, sub=12)
+    note(s, "الاتساق هو النتيجة: نفس حساب الميزة يمنع انحراف التدريب والخدمة.",
+         "Consistency is the outcome: the same feature calculation prevents training-serving skew.")
+
+
+def v17_label_quality(prs):
+    s = slide_new(prs, "حلقة جودة التصنيف / Label Quality Loop")
+    card(s, Inches(0.8), Inches(1.55), Inches(4.9), Inches(0.9),
+         "تسميات متسرعة أو غير متسقة", "Rushed or inconsistent labels", FILL_C, size=16, sub=12)
+    card(s, Inches(0.8), Inches(2.7), Inches(4.9), Inches(1.25),
+         "ضوضاء ← نموذج ضعيف ← تصحيحات أكثر",
+         "Noise → weak model → more corrections", FILL_D, size=15, sub=12)
+    arrow(s, Inches(5.9), Inches(3.1), Inches(0.75), Inches(0.3), left=False)
+    card(s, Inches(6.9), Inches(1.55), Inches(4.9), Inches(0.9),
+         "اقتراح LLM + مراجعة بشرية", "LLM suggestion + human review", FILL_B, size=16, sub=12)
+    card(s, Inches(6.9), Inches(2.7), Inches(4.9), Inches(1.25),
+         "تسميات موثوقة ← نموذج أفضل ← تغذية راجعة",
+         "Trusted labels → better model → feedback", FILL_A, size=15, sub=12)
+    card(s, Inches(3.35), Inches(5.05), Inches(6.65), Inches(0.78),
+         "قِس اتفاق المقيمين قبل قبول البيانات / Measure reviewer agreement before accepting data",
+         None, FILL_D, size=13)
+    note(s, "الـ LLM يسرّع العمل؛ الإنسان يظل مسؤولًا عن القبول والجودة.",
+         "The LLM accelerates work; people remain accountable for acceptance and quality.")
+
+
+def v18_lineage_map(prs):
+    s = slide_new(prs, "خريطة سلسلة العهدة / Data Lineage Map")
+    steps = [
+        ("مصدر", "Source", "CRM / API", FILL_D),
+        ("تحويل", "Transform", "تنظيف + توحيد", FILL_A),
+        ("منتج بيانات", "Data product", "مخطط + مالك", FILL_B),
+        ("استهلاك", "Consume", "لوحة / نموذج", FILL_C),
+    ]
+    x = Inches(0.65)
+    for i, (ar, en, detail, fill) in enumerate(steps):
+        card(s, x, Inches(2.05), Inches(2.8), Inches(0.95), ar, en, fill, size=16, sub=12)
+        card(s, x, Inches(3.2), Inches(2.8), Inches(0.7), detail, None, FILL_D, size=12)
+        if i < len(steps) - 1:
+            arrow(s, x + Inches(2.88), Inches(2.45), Inches(0.36), Inches(0.3), left=False)
+        x += Inches(3.15)
+    card(s, Inches(2.5), Inches(5.15), Inches(8.35), Inches(0.8),
+         "لكل خطوة: مالك + وقت + سياسة + أثر التغيير",
+         "For every step: owner + time + policy + change impact", FILL_A, size=14, sub=12)
+    note(s, "اسأل «من أين جاءت هذه النتيجة؟» ثم اتبع السلسلة إلى المصدر.",
+         "Ask “where did this result come from?” then follow the chain to its source.")
+
+
+def v19_mlops_lifecycle(prs):
+    s = slide_new(prs, "دورة حياة MLOps / MLOps Lifecycle")
+    steps = [
+        ("تجربة", "Experiment", FILL_A),
+        ("تحقق", "Validate", FILL_B),
+        ("نشر", "Deploy", FILL_C),
+        ("مراقبة", "Monitor", FILL_D),
+        ("إعادة تدريب", "Retrain", FILL_A),
+    ]
+    x = Inches(0.55)
+    for i, (ar, en, fill) in enumerate(steps):
+        card(s, x, Inches(2.15), Inches(2.2), Inches(1.25), ar, en, fill, size=15, sub=11)
+        if i < len(steps) - 1:
+            arrow(s, x + Inches(2.25), Inches(2.65), Inches(0.28), Inches(0.3), left=False)
+        x += Inches(2.55)
+    card(s, Inches(2.1), Inches(4.4), Inches(9.1), Inches(0.95),
+         "سجّل الإصدارات والقياسات في كل مرحلة — ثم أعد التعلم من الإنتاج",
+         "Record versions and metrics at every stage — then learn again from production",
+         FILL_B, size=15, sub=12)
+    note(s, "MLOps ليس «نشرًا مرة واحدة»؛ إنه حلقة قابلة للقياس والتحسين.",
+         "MLOps is not “deploy once”; it is a measurable improvement loop.")
+
+
+def v20_glossary_map(prs):
+    s = slide_new(prs, "خريطة المصطلحات / Glossary Map")
+    groups = [
+        ("البيانات والتخزين", "Data & storage", FILL_A),
+        ("الخصائص", "Features", FILL_B),
+        ("RAG والاسترجاع", "RAG & retrieval", FILL_C),
+        ("الحوكمة", "Governance", FILL_D),
+        ("MLOps", "MLOps", FILL_A),
+    ]
+    positions = [(0.8, 1.35), (4.75, 1.35), (8.7, 1.35), (2.75, 3.75), (6.7, 3.75)]
+    for (ar, en, fill), (x, y) in zip(groups, positions):
+        card(s, Inches(x), Inches(y), Inches(3.8), Inches(1.2), ar, en, fill, size=16, sub=12)
+    card(s, Inches(4.2), Inches(2.55), Inches(4.95), Inches(0.7),
+         "تعلم المصطلحات كمجموعات مترابطة", "Learn terms as connected groups", FILL_D, size=13, sub=11)
+    note(s, "استخدم هذه الخريطة قبل الرجوع إلى التعريفات التفصيلية.",
+         "Use this map before returning to the detailed definitions.")
+
+
 def v08_genai_arch(prs):
     s = slide_new(prs, "المعمارية المرجعية للذكاء التوليدي / GenAI Reference Architecture")
     layers = [("أ. بوابة منصة GenAI", "A. Platform Portal — POC → MVP → PROD", FILL_A),
@@ -328,6 +475,9 @@ if __name__ == "__main__":
     v04_contract(prs); v05_rag_pipeline(prs); v06_chunking(prs)
     v07_triad(prs); v08_genai_arch(prs); v09_cost(prs); v10_concepts(prs)
     v11_feature_store(prs); v12_labeling_flow(prs); v13_grounded_answer(prs)
+    v14_data_spectrum(prs); v15_warehouse_lake(prs); v16_raw_features(prs)
+    v17_label_quality(prs); v18_lineage_map(prs); v19_mlops_lifecycle(prs)
+    v20_glossary_map(prs)
     out = "output/Module02_Visualizations.pptx"
     prs.save(out)
     print(out, len(prs.slides._sldIdLst), "slides")
