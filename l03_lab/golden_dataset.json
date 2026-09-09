@@ -1,0 +1,107 @@
+{
+  "name": "L03 Golden Dataset",
+  "description": "10-20 reference Q&A pairs to benchmark RAGAS scores (faithfulness, answer relevancy, context precision). AR/EN.",
+  "metrics": [
+    "faithfulness",
+    "answer_relevancy",
+    "context_precision"
+  ],
+  "items": [
+    {
+      "id": 1,
+      "question": "ما الفرق بين ETL وELT؟",
+      "question_en": "What is the difference between ETL and ELT?",
+      "reference_answer": "ETL يحوّل البيانات قبل تحميلها إلى الوجهة، بينما ELT يحمّلها أولاً ثم يحوّلها داخل المنصة الهدف.",
+      "reference_answer_en": "ETL transforms before loading into the destination; ELT loads first and transforms inside the target platform.",
+      "expected_source": "NOT_IN_CORPUS"
+    },
+    {
+      "id": 2,
+      "question": "ما طبقات المعمارية المتدرِّجة Medallion؟",
+      "question_en": "What are the Medallion architecture layers?",
+      "reference_answer": "Bronze للبيانات الخام غير القابلة للتغيير، Silver للبيانات المنقّاة والمنظّمة، Gold للتجميعات الجاهزة للتحليل.",
+      "reference_answer_en": "Bronze holds raw immutable data, Silver holds cleansed structured data, Gold holds analytics-ready aggregates.",
+      "expected_source": "etl_notes.txt"
+    },
+    {
+      "id": 3,
+      "question": "ما مكونات عقد البيانات الثلاثة؟",
+      "question_en": "What are the three components of a data contract?",
+      "reference_answer": "المخطط (schema)، الأمان (security)، ومستوى الخدمة (SLA).",
+      "reference_answer_en": "Schema, security, and SLA.",
+      "expected_source": "etl_notes.txt"
+    },
+    {
+      "id": 4,
+      "question": "ما الاستراتيجية الموصى بها افتراضيًا لتقسيم النصوص في RAG؟",
+      "question_en": "Which chunking strategy is the recommended default in RAG?",
+      "reference_answer": "التقسيم التكراري (Recursive Chunking): فصل حسب الفقرات ثم تقسيم ما تجاوز الحد الأقصى للحجم.",
+      "reference_answer_en": "Recursive chunking: split by paragraphs, then recursively split oversized chunks.",
+      "expected_source": "rag_basics.md"
+    },
+    {
+      "id": 5,
+      "question": "لماذا نستخدم البحث الهجين في الاسترجاع؟",
+      "question_en": "Why use hybrid retrieval?",
+      "reference_answer": "لأن البحث الكثيف يفهم المعنى الدلالي بينما BM25 يطابق الكلمات المفتاحية النادرة حرفيًا، فيغطيان معًا حالات أكثر.",
+      "reference_answer_en": "Dense search captures semantic meaning while BM25 matches rare exact keywords, covering more query types together.",
+      "expected_source": "NOT_IN_CORPUS"
+    },
+    {
+      "id": 6,
+      "question": "ما وظيفة إعادة الترتيب Cross-encoder؟",
+      "question_en": "What does cross-encoder reranking do?",
+      "reference_answer": "يعيد تقييم المرشحين المسترجعين بنموذج أدق لرفع ملاءمة النتائج النهائية قبل التوليد.",
+      "reference_answer_en": "It re-scores retrieved candidates with a more accurate model to improve final relevance before generation.",
+      "expected_source": "NOT_IN_CORPUS"
+    },
+    {
+      "id": 7,
+      "question": "ما مكونات مثلث تقييم RAG الثلاثة؟",
+      "question_en": "What are the three components of the RAG evaluation triad?",
+      "reference_answer": "الوفاء بالمصدر (Faithfulness)، ملاءمة الإجابة (Answer Relevancy)، ودقة السياق (Context Precision).",
+      "reference_answer_en": "Faithfulness, answer relevancy, and context precision.",
+      "expected_source": "rag_basics.md"
+    },
+    {
+      "id": 8,
+      "question": "كيف يقلل التخزين الدلالي المؤقت التكلفة؟",
+      "question_en": "How does semantic caching reduce cost?",
+      "reference_answer": "بإعادة استخدام إجابات الأسئلة المشابهة دلاليًا بدلاً من استدعاء نموذج التوليد في كل مرة.",
+      "reference_answer_en": "By reusing answers for semantically similar questions instead of calling the generation model every time.",
+      "expected_source": "NOT_IN_CORPUS"
+    },
+    {
+      "id": 9,
+      "question": "ما الفرق بين AI Agent وAgentic AI؟",
+      "question_en": "What is the difference between an AI agent and agentic AI?",
+      "reference_answer": "الوكيل يكشف النية ويستدعي الأدوات استجابةً لطلب، بينما النظام الوكيلي يخطط ذاتيًا وينفذ خطوات متعددة ويتكيف مع النتائج.",
+      "reference_answer_en": "An agent detects intent and calls tools reactively; agentic AI self-plans multi-step execution and adapts to outcomes.",
+      "expected_source": "NOT_IN_CORPUS"
+    },
+    {
+      "id": 10,
+      "question": "ما طبقات المعمارية المرجعية للذكاء التوليدي؟",
+      "question_en": "What are the layers of the GenAI reference architecture?",
+      "reference_answer": "أ. بوابة المنصة، ب. الأتمتة والامتثال، ج. الخدمات المشتركة، د. الحوكمة والمراقبة.",
+      "reference_answer_en": "A. platform portal, B. automation & compliance, C. shared services, D. governance & monitoring.",
+      "expected_source": "NOT_IN_CORPUS"
+    },
+    {
+      "id": 11,
+      "question": "لماذا التضمين أرخص من التوليد؟",
+      "question_en": "Why is embedding cheaper than generation?",
+      "reference_answer": "لأنه ينتج متجهة رقمية بعملية ترميز واحدة، بينما التوليد يُنتج الرموز تسلسليًا رمزًا تلو الآخر بحساب أثقل.",
+      "reference_answer_en": "Embedding produces one vector in a single encoding pass, while generation autoregressively produces tokens with much heavier compute.",
+      "expected_source": "NOT_IN_CORPUS"
+    },
+    {
+      "id": 12,
+      "question": "ما دور مخزن الخصائص في تطبيقات الوكلاء؟",
+      "question_en": "What is a feature store's role in agentic applications?",
+      "reference_answer": "يوفر ميزات لحظية متسقة بين بيئتي التدريب والخدمة، ويكون مصدر الحقيقة للميزات أمام قرارات الوكيل.",
+      "reference_answer_en": "It serves consistent real-time features across training and serving, acting as the source of truth behind agent decisions.",
+      "expected_source": "NOT_IN_CORPUS"
+    }
+  ]
+}

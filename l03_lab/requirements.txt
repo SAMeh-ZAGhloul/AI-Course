@@ -1,0 +1,17 @@
+# L03 — local lightweight stack (no Docker)
+# DB: SQLite — built into Python (no server install needed)
+numpy<2
+sqlalchemy==2.0.36
+chromadb==0.5.20
+fastapi==0.115.5
+uvicorn[standard]==0.32.0
+pydantic==2.9.2
+pandas==2.2.3
+pypdf==5.1.0
+rapidfuzz==3.10.1
+requests==2.32.3
+streamlit==1.40.1
+# Generator: OpenRouter free tier by default (needs OPENROUTER_API_KEY env var)
+# requests (already listed) is used for the OpenRouter API call.
+# Optional: OpenAI as the generator instead
+# openai==1.55.0

@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Lab runtime artefacts (recreated by etl_pipeline.py)
+l03_lab/l03_lab.db
+l03_lab/chroma_db/
+l03_lab/.env
+*.db
+*.sqlite3
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
+
+# Keep decks + sample PDFs tracked; ignore nothing else big

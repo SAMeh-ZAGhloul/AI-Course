@@ -1,0 +1,6 @@
+Medallion architecture: Bronze stores raw immutable data, Silver holds cleansed and
+deduplicated records, Gold contains analytics-ready aggregates. Governance improves
+as data quality improves between layers.
+
+Data contracts define schema, security, and SLA expectations between producers and
+consumers of a data product.
