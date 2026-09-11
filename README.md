@@ -125,3 +125,4 @@ Guard: refuses to run outside `.venv` (global env segfaults on macOS/ONNX). Laun
 
 - Regenerated artefacts (`*.db`, `chroma_db/`, `.venv/`) are git-ignored — don't commit.
 - Never commit `.env`. macOS: keep thread vars set, run Streamlit from `.venv`. Telemetry disabled in code for offline use.
+
