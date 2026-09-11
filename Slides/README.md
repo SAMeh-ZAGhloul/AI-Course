@@ -7,6 +7,7 @@ Bilingual (AR/EN) consolidated deck for Module 02. 89 slides: 7 lessons (V06–V
 | File | Size | Purpose |
 |------|------|---------|
 | `Module02_Consolidated_v1.0.pptx` | ~8.3 MB | Editable source of truth — edit this |
+| `Module02_Consolidated_v1.0.pdf` | ~4.1 MB | Distributable snapshot — regenerate after every PPTX change |
 
 > Keep both in sync. Export PDF from PowerPoint/Keynote after editing the PPTX.
 
