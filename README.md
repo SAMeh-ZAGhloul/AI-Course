@@ -69,9 +69,57 @@ streamlit run streamlit_ui_enhanced.py
 
 `.env` (git-ignored, required for generation): `OPENROUTER_API_KEY`, `GENERATOR=openrouter|openai`, `OPENROUTER_MODEL`, `DB_URL`. Rebuild index: `rm -rf chroma_db l03_lab.db`.
 
-## Slides
+## Slides — Module 02: Data Engineering for AI
 
-`Slides/Module02_Consolidated_v1.0.{pptx,pdf}` — Module 02 deck. PPTX (~8.3 MB) editable source; PDF (~4.1 MB) snapshot.
+`Slides/Module02_Consolidated_v1.0.{pptx,pdf}` — 89 slides, bilingual AR/EN. PPTX (~8.3 MB) is the editable source; PDF (~4.1 MB) is the distributable snapshot. Keep both in sync.
+
+### Section map (7 lessons V06–V12 + glossary)
+
+| Slides | Lesson | Topics covered |
+|--------|--------|----------------|
+| 1–2 | Intro | Course title, module map |
+| 3–12 | V06 Data Fundamentals | Unified Data/AI platform, data spectrum & formats, ETL vs ELT, processing patterns (Medallion vs warehouse vs mesh) + quiz |
+| 13–23 | V07 Warehouses, Lakes & Lakehouse | Agenda, warehouse-vs-lake decision map, Medallion layers, data product & contract (schema/security/SLA), decision matrix, three data patterns + quiz |
+| 24–31 | V08 Feature Engineering & Stores | Raw→features, feature-store architecture, agentic applications, LLM → agentic AI + quiz |
+| 32–42 | V09 Vector DBs + Applied RAG | RAG pipeline, chunking strategies, retrieval, grounded-answer pattern, eval+optimization, RAG triad, pitfalls + quiz |
+| 43–49 | V10 Labeling at Scale | Label quality loop, tooling, LLM-assisted labeling workflow + quiz |
+| 50–58 | V11 Governance, Lineage & Catalog | Governance & cataloging, lineage map, GenAI reference architecture (2-part + summary) + quiz |
+| 59–69 | V12 MLOps + Lab Intro | MLOps lifecycle, concept distinctions (agent vs agentic), cost/performance (embedding vs generation), L03 architecture + run guide + quiz |
+| 70–79 | (visual appendix) | Diagram-only appendix pages |
+| 80–89 | Glossary | Glossary map + 8 glossary term pages (AR/EN) |
+
+Each lesson ends with a Quick Quiz + Answers pair. Most relevant to the Lab: V06 (Medallion = Bronze/Silver/Gold), V09 (chunking, retrieval, grounded generation, triad eval), V12 (cost, L03 run guide).
+
+
+## Lab — App deep dive
+
+### Streamlit UI (`streamlit_ui_enhanced.py`, 6 tabs)
+
+| Tab | Purpose |
+|-----|---------|
+| 🎓 Educational Flow | Step-through of Bronze→Silver→Gold→Retrieval→Generation→Evaluation with visuals |
+| 📤 Upload | Drop txt/md/csv/pdf → re-runs Bronze→Silver→Gold for the new file |
+| 📄 Documents | Distinct docs indexed + chunk counts (from `gold_chunks` metadatas) |
+| 💬 Query | Ask → dense retrieval + grounded answer with `[1],[2]` citations and scores |
+| 📊 Evaluation | Golden-set run: `expected_source_found` ✅/❌ + precision + PCA/t-SNE embedding projection (plotly/sklearn) |
+| ⚙️ About | Learning outcomes, stack, commands, file map |
+
+Guard: refuses to run outside `.venv` (global env segfaults on macOS/ONNX). Launch: `./run_ui_enhanced.sh` → `http://localhost:8501`.
+
+### API contract (`rag_api.py`)
+
+`POST /query` body `{"question": "..."}` → `{"answer": str, "cached": bool, "sources": [{"text","source","score"}]}`. Empty hits → bilingual "not enough info" message. Cache compares against last Q only (demo-grade).
+
+### Knowledge base (`Lab/data/raw/`, 8 files)
+
+- `etl_notes.txt` (322 B) — Medallion layers + data contracts.
+- `rag_basics.md` (575 B) — RAG definition, recursive-chunking defaults (300–800 chars, 10–20% overlap), triad/RAGAS.
+- `-Global-Data-Privacy-Program-BRD-SDD-v1_3.md` (~67 KB) — enterprise privacy BRD/SDD v1.3 (consent/cookies, DPIA, ROPA vocab, metrics library; 9-framework baseline).
+- `-Trust-Layer-AI-Governance-Platform-BRD-SDD-v0_2.md` (~27 KB) — Trust Layer AI-governance BRD/SDD (discovery, risk engine, doc engine, 9-framework rules layer).
+- `AEGIS_AI_ConceptPaper.pdf` (45 pp) — AEGIS-AI counter-UAS concept & architecture (ITC-2026).
+- `AEGIS_AI_Presentation.pdf` (29 pp) — AEGIS-AI slide deck (swarm-vs-swarm tracking).
+- `Egypt-PDPL-self-assessment-v2_14.pdf` (47 pp) — PDPL/GDPR/AI-Act self-assessment readiness.
+- `Introduction to Quantum mechanics.pdf` (31 pp) — off-topic distractor doc (tests retrieval precision).
 
 ## Notes
 
