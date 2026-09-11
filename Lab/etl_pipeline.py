@@ -131,7 +131,12 @@ def gold(silver_df, batch_size=10, progress_cb=None):
         client = chromadb.PersistentClient(path=CHROMA_DIR,
                                            settings=Settings(anonymized_telemetry=False))
         print("[Gold] chroma client ready.", flush=True)
-        ef = embedding_functions.DefaultEmbeddingFunction()  # local MiniLM (all-MiniLM-L6-v2)
+        _emb_name = os.getenv("EMBEDDING_MODEL", "").strip() or None
+        if _emb_name:
+            from chromadb.utils.embedding_functions import SentenceTransformerEmbeddingFunction
+            ef = SentenceTransformerEmbeddingFunction(model_name=_emb_name)
+        else:
+            ef = embedding_functions.DefaultEmbeddingFunction()  # local MiniLM (all-MiniLM-L6-v2)
         print("[Gold] embedding function loaded.", flush=True)
         try:
             _probe = ef(["hello"])
