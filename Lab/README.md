@@ -55,14 +55,6 @@ Guard: refuses to run outside `.venv` (global Python segfaults on macOS/ONNX). T
 
 - `etl_notes.txt` (322 B) — Medallion layers + data contracts. Covered by golden items 2–3.
 - `rag_basics.md` (575 B) — RAG definition, recursive-chunking defaults, triad/RAGAS. Covered by golden items 4, 7.
-- `-Global-Data-Privacy-Program-BRD-SDD-v1_3.md` (~67 KB) — enterprise privacy BRD/SDD v1.3 (consent & cookies, DPIA Unsure path, ROPA vocab, metrics library; 9-framework baseline).
-- `-Trust-Layer-AI-Governance-Platform-BRD-SDD-v0_2.md` (~27 KB) — Trust Layer AI-governance BRD/SDD v0.2 (discovery, risk engine, doc engine, 9-framework rules layer).
-- `AEGIS_AI_ConceptPaper.pdf` (45 pp) — AEGIS-AI counter-UAS concept & architecture (ITC-2026).
-- `AEGIS_AI_Presentation.pdf` (29 pp) — AEGIS-AI slide deck (swarm-vs-swarm tracking).
-- `Egypt-PDPL-self-assessment-v2_14.pdf` (47 pp) — PDPL/GDPR/AI-Act self-assessment readiness.
-- `Introduction to Quantum mechanics.pdf` (31 pp) — off-topic distractor (tests retrieval precision).
-
-Golden set (`golden_dataset.json`, 12 items): items 2–4, 7 in-corpus (should hit ✅); items 1, 5–6, 8–12 are `NOT_IN_CORPUS` negative controls (correct = no-hit / don't-know).
 
 ## Quickstart
 
