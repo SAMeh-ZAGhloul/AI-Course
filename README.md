@@ -36,15 +36,15 @@ AI Course/
 | Bronze | Ingest txt/md/csv/pdf unmodified into SQLite `bronze_docs` | `etl_pipeline.py::bronze()` |
 | Silver | Clean, dedupe (RapidFuzz), recursive chunk 500/50 | `etl_pipeline.py::silver()` |
 | Gold | Embed `all-MiniLM-L6-v2` (384-dim) + HNSW in ChromaDB `gold_chunks` | `etl_pipeline.py::gold()` |
-| Retrieval | Dense cosine search, top-k=5, min-score 0.2 | `rag_api.py::retrieve()` |
-| Generation | Grounded prompt via OpenRouter (default) or OpenAI | `rag_api.py::generate()` |
+| Retrieval | Multi-variant dense cosine search (top-k=5, min-score 0.2): original + AR→EN glossary expansion + LLM translation, merged + keyword fallback (PDPL/DPIA/ROPA) | `rag_api.py::retrieve()` |
+| Generation | Grounded prompt via OpenRouter (default) or OpenAI — answers in the question's language (AR→Arabic, EN→English) | `rag_api.py::generate()` |
 | Cache | Demo semantic cache, cosine >= 0.92 reuses answer | `rag_api.py::_similarity()` |
 | Evaluation | Golden-set check: source-found + context precision | `rag_api.py::evaluate()` |
 
 ## Key Files
 
-- `Lab/etl_pipeline.py` (~195 lines) — env `DB_URL`, `CHROMA_DIR`, `SOURCE_DOCS`. Run: `python -u etl_pipeline.py`.
-- `Lab/rag_api.py` (~137 lines) — `POST /query {"question"}` → `{"answer","cached","sources"}`. Run: `uvicorn rag_api:app --reload`. Eval: `python rag_api.py evaluate`.
+- `Lab/etl_pipeline.py` (~200 lines) — env `DB_URL`, `CHROMA_DIR`, `SOURCE_DOCS`, `EMBEDDING_MODEL` (optional multilingual upgrade). Run: `python -u etl_pipeline.py`.
+- `Lab/rag_api.py` (~294 lines, v1.1-bilingual) — `POST /query {"question"}` → `{"answer","cached","sources"}`. Bilingual: `detect_lang()` + `local_ar_to_en()` + `llm_translate()` + `retrieval_queries()`. Run: `uvicorn rag_api:app --reload`. Eval: `python rag_api.py evaluate`.
 - `Lab/streamlit_ui_enhanced.py` (~876 lines) — 6 tabs: Educational Flow | Upload | Documents | Query | Evaluation | About. Must run inside `.venv`.
 - `Lab/golden_dataset.json` — 12 bilingual items; some `expected_source=NOT_IN_CORPUS` (negative controls).
 - `Lab/requirements.txt` — sqlalchemy 2.0.36, chromadb 0.5.20, fastapi 0.115.5, streamlit 1.40.1, plotly, sklearn. Python 3.10+.

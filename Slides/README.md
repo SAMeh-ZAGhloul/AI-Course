@@ -1,6 +1,6 @@
 # Slides — Module 02: Data Engineering for AI
 
-Bilingual (AR/EN) consolidated deck for Module 02. 89 slides: 7 lessons (V06–V12) + visual appendix + glossary.
+Bilingual (AR/EN) consolidated deck for Module 02. 89 slides: 7 lessons (V06–V12) + visual appendix + glossary. Pairs with the bilingual AR/EN L03 RAG lab in `../Lab` (v1.1: Arabic queries auto-expanded for retrieval, answers in the question's language).
 
 ## Files
 
@@ -64,3 +64,4 @@ Glossary title + map + 8 term pages (AR/EN) covering the module vocabulary.
 - Every lesson ends with a Quick Quiz + Answers pair — use for in-class checks.
 - All content slides are bilingual: Arabic headings with English parallels.
 - Lessons most relevant to the Lab: V06 (Medallion), V09 (RAG), V12 (MLOps/cost/run guide).
+- Lab link: `../Lab/README.md` — try the bilingual demo queries `what is PDPL?` and `ما هو قانون حماية البيانات الشخصية؟`.
