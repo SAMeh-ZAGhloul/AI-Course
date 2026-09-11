@@ -9,6 +9,11 @@ venv/
 l03_lab/l03_lab.db
 l03_lab/chroma_db/
 l03_lab/.env
+Lab/l03_lab.db
+Lab/chroma_db/
+Lab/.env
+l03_lab.db
+chroma_db/
 *.db
 *.sqlite3
 
